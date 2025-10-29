@@ -2,7 +2,6 @@ import Map from "https://js.arcgis.com/4.33/@arcgis/core/Map.js";
 import MapView from "https://js.arcgis.com/4.33/@arcgis/core/views/MapView.js";
 import FeatureLayer from "https://js.arcgis.com/4.33/@arcgis/core/layers/FeatureLayer.js";
 import Legend from "https://js.arcgis.com/4.33/@arcgis/core/widgets/Legend.js";
-import LayerList from "https://js.arcgis.com/4.33/@arcgis/core/widgets/LayerList.js";
 import Graphic from "https://js.arcgis.com/4.33/@arcgis/core/Graphic.js";
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -34,10 +33,6 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   view.ui.add(legend, "bottom-left");
-
-  const layerList = new LayerList({ view });
-  view.ui.add(layerList, "top-right");
-
   var $table = $('#table');
 
   // initialize bootstrap-table so insertRow/removeAll work
@@ -493,40 +488,4 @@ $table.bootstrapTable('load', Object.entries(stateObj).map(([k,v]) => ({
     console.log('Adding State Tax Layer to map with', graphics.length, 'graphics');
     map.add(layer);
   });
-
-  const blue1 = { type: "simple-fill", color: "#eff3ff", style: "solid", outline: { width: 0.2, color: [255, 255, 255, 0.6] } };
-  const blue2 = { type: "simple-fill", color: "#bdd7e7", style: "solid", outline: { width: 0.2, color: [255, 255, 255, 0.6] } };
-  const blue3 = { type: "simple-fill", color: "#6baed6", style: "solid", outline: { width: 0.2, color: [255, 255, 255, 0.6] } };
-  const blue4 = { type: "simple-fill", color: "#2171b5", style: "solid", outline: { width: 0.2, color: [255, 255, 255, 0.6] } };
-
-  const marriedRenderer = {
-    type: "class-breaks",
-    field: "B12001_calc_pctMarriedE",
-    legendOptions: { title: "% Married" },
-    defaultSymbol: {
-      type: "simple-fill",
-      color: "black",
-      style: "backward-diagonal",
-      outline: { width: 0.3, color: [80, 80, 80, 0.4] }
-    },
-    defaultLabel: "no data",
-    classBreakInfos: [
-      { minValue: 45, maxValue: 48.9, symbol: blue1, label: "45–48.9%" },
-      { minValue: 49, maxValue: 52.9, symbol: blue2, label: "49–52.9%" },
-      { minValue: 53, maxValue: 56.9, symbol: blue3, label: "53–56.9%" },
-      { minValue: 57, maxValue: 60, symbol: blue4, label: "57–60%" }
-    ]
-  };
-
-  const marriedLayer = new FeatureLayer({
-    url: maritalStatusUrl,
-    title: "% Married (ACS 2010–2014)",
-    outFields: ["STUSPS", "NAME", "B12001_calc_pctMarriedE"],
-    renderer: marriedRenderer,
-    visible: false
-  });
-
-  map.add(marriedLayer);
-
-  
 });
