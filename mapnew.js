@@ -513,8 +513,8 @@ $table.bootstrapTable('load', Object.entries(stateObj).map(([k,v]) => ({
     classBreakInfos: [
       { minValue: 45, maxValue: 48.9, symbol: blue1, label: "45–48.9%" },
       { minValue: 49, maxValue: 52.9, symbol: blue2, label: "49–52.9%" },
-      { minValue: 53, maxValue: 56.9, symbol: blue3, label: "53–56.9%" },
-      { minValue: 57, maxValue: 60, symbol: blue4, label: "57–60%" }
+      { minValue: 53, maxValue: 55.9, symbol: blue3, label: "53–55.9%" },
+      { minValue: 56, maxValue: 60, symbol: blue4, label: "56–60%" }
     ]
   };
 
